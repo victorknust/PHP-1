@@ -1,10 +1,7 @@
 <?php
 include("Library/Configuration/base.config.php");
 /*************************************************
- * core.config.view.php
- * This configures the common HTML tags, elements
- * and attributes that will be used when creating
- * the view (mostly because I hate templating).
+ * Main database class
  *
  * @author			Arbor Solutions, Inc.
  * @website			http://www.arbsol.com
@@ -40,19 +37,6 @@ class DBConn {
 
 	/**************************************************
 	 * Constructor
-	 * Constructs the database connection object and
-	 * assigns empty property values if none are given;
-	 * allowing two methods of instantiation.  Cannot
-	 * construct using the reference link, query, type
-	 * of query, connection status, errors, or the sql
-	 * results - they are controlled elsewhere...
-	 *
-	 * @param		dbtyp: type of database to work with
-	 * @param		host: host to use for the connection
-	 * @param		user: username for the database
-	 * @param		pass: password for the database
-	 * @param		dbname: database name
-	 * @param		tblname: data table name
 	 ***************************************************/
 
 	function DBConn() {
