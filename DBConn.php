@@ -319,9 +319,9 @@ class DBConn {
 
 		if($j != null) $sql .= " $j ";
 
-		$sql .= "WHERE ";
+		
 		if(isset($w) && !empty($w) && $w != null) {
-
+			$sql .= "WHERE ";
 			foreach($w as $column => $toBind) {
 				$sql .= " $column " . "$toBind";
 			}
