@@ -279,37 +279,6 @@ class DBConn {
 	}
 
 
-	/***************************************
-	 * QPrepEx
-	 * Prepares a statement for execution
-	 * and binds the parameters / results
-	 *
-	 * @param	sql: statement to prep
-	 * @param	parms: parameters to bind
-	 *************************************/
-	function QPrepEx($sql, array $parms) {
-
-		if($this->DbLinkRef == null || !isset($this->DbLinkRef)) return null;
-
-		// handle errors trying to prep
-		if($this->Query = $this->DbLinkRef->prepare($sql)) {
-
-			foreach($parms as $k => $v) {
-
-				$$k = $v;
-				$tp = gettype($v)[0];
-
-				$this->Query->bind_param("$tp", $$k);
-			}
-
-			$this->Query->execute();
-			$this->SQLResults = $this->Query->get_result();
-			$this->Query->close();
-			return $this->SQLResults;
-		}
-		return null;
-	}
-
 
 	/*****************************************
 	 * QQuery
@@ -401,7 +370,7 @@ class DBConn {
 		$sql .= "WHERE ";
 
 		foreach($condition as $varWithSign => $right) {
-			$sql .= "$column $right ";
+			$sql .= "$varWithSign $right ";
 		}
 
 		$this->sQry($sql);
