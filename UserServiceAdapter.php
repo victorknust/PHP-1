@@ -114,51 +114,69 @@ class UserServiceAdapter implements UserServiceAdapterUI {
 	function InsertNewUser(User $user) {
 		if($user == null) return false;
 		$props = array(
-			"UName"	=>	"'" . "$user->getUserName()," . "'",
-			"UPass"	=>	"$user->getPassword()," . "'",
-			"UEmail"	=>	"'" . "$user->getEmail()," . "'",
-			"Session"	=>	"'" . "$user->getSession()," . "'",
-			"FirstName"	=>	"'" . "$user->getFirstName()," . "'",
-			"LastName"	=>	"'" . "$user->getLastName()," . "'",
-			"Phone"	=>	"'" . "$user->getPhoneNumber()," . "'",
-			"LastCheckInLocation"	=>	"'" . "$user->getLocation()," . "'",
-			"Department"	=>	"'" . "$user->getDeparment()," . "'",
-			"PayRate"	=>	"'" . "$user->getPayRate()," . "'",
-			"Online"	=>	"'" . "$user->getActive()," . "'",
-			"AccType"	=>	"'" . "$user->getAccountType()," . "'",
-			"StatusID"	=>	"'" . "$user->getCurrentStatus()," . "'",
-			"LastCheckIn"	=>	"'" . "$user->getLastActive()," . "'",
-			"ManagerID"	=>	"'" . "$user->getManagerID()," . "'",
-			"AccountVerified"	=>	"'" . "$user->getVerifStatus()," . "'",
-			"IsManager"	=>	"'" . "$user->getIsManager()" . "'",
+			"UName"	=>	$user->getUserName(),
+			"UPass"	=>	$user->getPassword(),
+			"UEmail"	=>	$user->getEmail(),
+			"Session"	=>	$user->getSession(),
+			"FirstName"	=>	$user->getFirstName(),
+			"LastName"	=>	$user->getLastName(),
+			"Phone"	=>	$user->getPhoneNumber(),
+			"LastCheckInLocation"	=>	$user->getLocation(),
+			"Department"	=>	$user->getDeparment(),
+			"PayRate"	=>	$user->getPayRate(),
+			"Online"	=>	$user->getActive(),
+			"AccType"	=>	$user->getAccountType(),
+			"StatusID"	=>	$user->getCurrentStatus(),
+			"LastCheckIn"	=>	$user->getLastActive(),
+			"ManagerID"	=>	$user->getManagerID(),
+			"AccountVerified"	=>	$user->getVerifStatus(),
+			"IsManager"	=>	$user->getIsManager()
 		);
-		$this->_dbAdapt->IStatement(DB_TBL_USER, $props);
+		foreach($props as $k => $v) {
+			if($v != null) {
+				if($k == "IsManager") {
+					$_props[$k] = "'" . $v . "'";
+				} else {
+					$_props[$k] = "'" . $v . "', ";
+				}
+			}
+		}
+		$this->_dbAdapt->IStatement(DB_TBL_USER, $_props);
 		$this->_dbAdapt->QQuery();
 		return true;
 	}
 	function UpdateUser(User $user = null) {
 		if($user == null || $user->getUID() == null) return false;
 		$props = array(
-			"UName"	=>	"'" . "$user->getUserName()," . "'",
-			"UPass"	=>	"$user->getPassword()," . "'",
-			"UEmail"	=>	"'" . "$user->getEmail()," . "'",
-			"Session"	=>	"'" . "$user->getSession()," . "'",
-			"FirstName"	=>	"'" . "$user->getFirstName()," . "'",
-			"LastName"	=>	"'" . "$user->getLastName()," . "'",
-			"Phone"	=>	"'" . "$user->getPhoneNumber()," . "'",
-			"LastCheckInLocation"	=>	"'" . "$user->getLocation()," . "'",
-			"Department"	=>	"'" . "$user->getDeparment()," . "'",
-			"PayRate"	=>	"'" . "$user->getPayRate()," . "'",
-			"Online"	=>	"'" . "$user->getActive()," . "'",
-			"AccType"	=>	"'" . "$user->getAccountType()," . "'",
-			"StatusID"	=>	"'" . "$user->getCurrentStatus()," . "'",
-			"LastCheckIn"	=>	"'" . "$user->getLastActive()," . "'",
-			"ManagerID"	=>	"'" . "$user->getManagerID()," . "'",
-			"AccountVerified"	=>	"'" . "$user->getVerifStatus()," . "'",
-			"IsManager"	=>	"'" . "$user->getIsManager()" . "'",
+			"UName"	=>	$user->getUserName(),
+			"UPass"	=>	$user->getPassword(),
+			"UEmail"	=>	$user->getEmail(),
+			"Session"	=>	$user->getSession(),
+			"FirstName"	=>	$user->getFirstName(),
+			"LastName"	=>	$user->getLastName(),
+			"Phone"	=>	$user->getPhoneNumber(),
+			"LastCheckInLocation"	=>	$user->getLocation(),
+			"Department"	=>	$user->getDeparment(),
+			"PayRate"	=>	$user->getPayRate(),
+			"Online"	=>	$user->getActive(),
+			"AccType"	=>	$user->getAccountType(),
+			"StatusID"	=>	$user->getCurrentStatus(),
+			"LastCheckIn"	=>	$user->getLastActive(),
+			"ManagerID"	=>	$user->getManagerID(),
+			"AccountVerified"	=>	$user->getVerifStatus(),
+			"IsManager"	=>	$user->getIsManager()
 		);
+		foreach($props as $k => $v) {
+			if($v != null) {
+				if($k == "IsManager") {
+					$_props[$k] = "'" . $v . "'";
+				} else {
+					$_props[$k] = "'" . $v . "', ";
+				}
+			}
+		}
 		$cond = array("UID = " => "$user->getUID()");
-		$this->_dbAdapt->UStatement(DB_TBL_USER, $props, $cond);
+		$this->_dbAdapt->UStatement(DB_TBL_USER, $_props, $cond);
 		$this->_dbAdapt->QQuery();
 		return true;
 	}
