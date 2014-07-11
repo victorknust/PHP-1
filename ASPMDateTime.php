@@ -1,9 +1,7 @@
 <?php
 /**************************************************
- * ASPMController.php
- * The main controller for the application. It
- * acts as a service model for the controllers
- * being created throughout the app.
+ * ASPMDATETIME
+ * A class to help service dates and times
  *
  * @author			Arbor Solutions, Inc.
  * @website			http://www.arbsol.com
